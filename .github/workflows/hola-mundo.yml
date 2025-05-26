@@ -1,19 +1,19 @@
-# name: hola-mundo
-# on:
-#   push:
-#     branches:
-#       - 'main' #Se activará si se hace push en la rama main
-#       - 'releases/**' #O en la rama releases y derivados
-# jobs:
-#   saludo:
-#     runs-on: ubuntu-latest # Usa un runner de GitHub basado en Ubuntu
+name: hola-mundo
+on:
+  push:
+    branches:
+      - 'main' #Se activará si se hace push en la rama main
+      - 'releases/**' #O en la rama releases y derivados
+jobs:
+  saludo:
+    runs-on: ubuntu-latest # Usa un runner de GitHub basado en Ubuntu
   
-#     steps:
-#       - name: Clonar el repositorio
-#         uses: actions/checkout@v3
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
 
-#       - name: Dar permiso de ejecucion al script
-#         run: chmod +x holamundo.sh
+      - name: Dar permiso de ejecucion al script
+        run: chmod +x holamundo.sh
 
-#       - name: Ejecutar el script
-#         run: ./holamundo.sh
+      - name: Ejecutar el script
+        run: ./holamundo.sh

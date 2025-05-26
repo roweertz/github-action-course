@@ -1,23 +1,37 @@
 name: pais-triggers
+
 on:
   workflow_dispatch:
     inputs:
       pais:
-        description: 'Pais'
+        description: 'País'
         required: true
         type: string
 
 jobs:
-  latino:
-    if: ${{ contains(fromJson('["peru", "mexico", "argentina", "colombia", "chile", "brasil", "ecuador", "bolivia", "uruguay", "paraguay", "venezuela"]'), toLower(github.event.inputs.pais)) }}
+  evaluar-pais:
     runs-on: ubuntu-latest
     steps:
-      - name: País Latinoamericano
-        run: echo "${{ github.event.inputs.pais }} es un país de América Latina."
+      - name: Convertir país a minúsculas
+        id: lowercase
+        uses: vishalmamidi/lowercase-action@v1
+        with:
+          string: ${{ github.event.inputs.pais }}
 
-  no_latino:
-    if: ${{ !contains(fromJson('["peru", "mexico", "argentina", "colombia", "chile", "brasil", "ecuador", "bolivia", "uruguay", "paraguay", "venezuela"]'), toLower(github.event.inputs.pais)) }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: País NO Latinoamericano
-        run: echo "${{ github.event.inputs.pais }} NO es un país de América Latina."
+      - name: Verificar si es país latino
+        id: verificar
+        run: |
+          pais_lower=${{ steps.lowercase.outputs.lowercase }}
+          echo "País en minúscula: $pais_lower"
+
+          # Lista de países latinos
+          lista='peru mexico argentina colombia chile brasil ecuador bolivia uruguay paraguay venezuela'
+
+          if echo "$lista" | grep -qw "$pais_lower"; then
+            echo "::set-output name=resultado::$pais_lower es un país de América Latina"
+          else
+            echo "::set-output name=resultado::$pais_lower NO es un país de América Latina"
+          fi
+
+      - name: Mostrar resultado
+        run: echo "${{ steps.verificar.outputs.resultado }}"

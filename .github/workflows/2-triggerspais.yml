@@ -1,0 +1,23 @@
+name: pais-triggers
+on:
+  workflow_dispatch:
+    inputs:
+      pais:
+        description: 'Pais'
+        required: true
+        type: string
+
+jobs:
+  latino:
+    if: ${{ contains(fromJson('["peru", "mexico", "argentina", "colombia", "chile", "brasil", "ecuador", "bolivia", "uruguay", "paraguay", "venezuela"]'), toLower(github.event.inputs.pais)) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: País Latinoamericano
+        run: echo "${{ github.event.inputs.pais }} es un país de América Latina."
+
+  no_latino:
+    if: ${{ !contains(fromJson('["peru", "mexico", "argentina", "colombia", "chile", "brasil", "ecuador", "bolivia", "uruguay", "paraguay", "venezuela"]'), toLower(github.event.inputs.pais)) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: País NO Latinoamericano
+        run: echo "${{ github.event.inputs.pais }} NO es un país de América Latina."

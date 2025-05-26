@@ -1,0 +1,27 @@
+name: Trigger-GitHubAction
+on:
+  workflow_dispatch:
+    inputs:
+      edad:
+        description: 'Edad'
+        required: true
+        type: integer
+      nombre:
+        description: 'Nombre'
+        required: true
+        default: Roweertz
+        type: string
+
+jobs:
+  mayor:
+    if: ${{ github.event.inputs.edad >= 18 }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Correr script para mayor de edad
+        run: echo "${{ github.event.inputs.nombre }} es mayor de edad"
+  menor:
+    if: ${{ github.event.inputs.edad < 18 }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Correr script para menor de edad
+        run: echo "${{ github.event.inputs.nombre }} es menor de edad"

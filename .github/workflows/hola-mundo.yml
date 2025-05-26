@@ -1,0 +1,15 @@
+name: hola-mundo
+on: [push]
+jobs:
+  saludo:
+    runs-on: ubuntu-latest # Usa un runner de GitHub basado en Ubuntu
+  
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Dar permiso de ejecucion al script
+        run: chmod +x hola-mundo.sh
+
+      - name: Ejecutar el script
+        uses: ./hola-mundo.sh

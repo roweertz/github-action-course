@@ -12,4 +12,4 @@ jobs:
         run: chmod +x holamundo.sh
 
       - name: Ejecutar el script
-        uses: ./holamundo.sh
+        run: ./holamundo.sh

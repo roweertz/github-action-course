@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Dar permiso de ejecucion al script
-        run: chmod +x hola-mundo.sh
+        run: chmod +x holamundo.sh
 
       - name: Ejecutar el script
-        uses: ./hola-mundo.sh
+        uses: ./holamundo.sh

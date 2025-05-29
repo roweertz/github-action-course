@@ -15,10 +15,9 @@ jobs:
   
       - name: Validar Commit
         run: |
-          nombre_comit=${{ github.event.head_commit.message }}
-          palabra = "fix"
-          if [[ "$mensaje" == *"fix"* ]]; then
+          nombrecomit=${{ github.event.head_commit.message }}
+          if [[ "$nombrecomit" == *"fix"* ]]; then
             echo "Se detectó una corrección (fix) en el commit"
           else
-            echo "Commit recibido de ${{ github.actor }} con mensaje: $nombre_comit"
+            echo "Commit recibido de ${{ github.actor }} con mensaje: $nombrecomit"
           fi

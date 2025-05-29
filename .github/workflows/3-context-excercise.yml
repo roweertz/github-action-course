@@ -1,4 +1,5 @@
 name: context-exercise
+
 on: push
 
 jobs:
@@ -9,6 +10,7 @@ jobs:
         run: echo "La rama es: $GITHUB_REF"
 
       - name: Lógica de despliegue según rama
+        shell: bash
         run: |
           branch="${GITHUB_REF#refs/heads/}"
 

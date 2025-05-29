@@ -1,0 +1,38 @@
+# name: contexto-intermedio
+# on: push
+
+# jobs:
+#   info-push:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Mostrar info del push
+#         run: |
+#           echo "Ref: $GITHUB_REF"
+#           echo "Repo: $GITHUB_REPOSITORY"
+#           echo "Evento: $GITHUB_EVENT_NAME"
+#           echo "Actor: $GITHUB_ACTOR"
+#           echo "SHA: $GITHUB_SHA"
+#           echo "Mensaje del commit:"
+#           git log -1 --pretty=%B
+
+name: context-exercise
+on: push
+
+jobs:
+  validar-rama:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar rama actual
+        run: echo "La rama es: $GITHUB_REF"
+
+      - name: Lógica de despliegue según rama
+        run: |
+          branch="${GITHUB_REF#refs/heads/}"
+
+          if [[ "$branch" == "develop" || "$branch" == "staging" ]]; then
+            echo "Desplegando en ambiente de pruebas en la rama $branch"
+          elif [[ "$branch" == "main" ]]; then
+            echo "Desplegando en ambiente de producción en la rama $branch"
+          else
+            echo "Commit hecho en rama $branch, no hay despliegue automático"
+          fi

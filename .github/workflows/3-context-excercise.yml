@@ -1,23 +1,23 @@
-name: context-exercise
+# name: context-exercise
 
-on: push
+# on: push
 
-jobs:
-  validar-rama:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Mostrar rama actual
-        run: echo "On branch - $GITHUB_REF"
+# jobs:
+#   validar-rama:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Mostrar rama actual
+#         run: echo "On branch - $GITHUB_REF"
 
-      - name: Lógica de despliegue según rama
-        shell: bash
-        run: |
-          branch="${GITHUB_REF#refs/heads/}"
+#       - name: Lógica de despliegue según rama
+#         shell: bash
+#         run: |
+#           branch="${GITHUB_REF#refs/heads/}"
 
-          if [[ "$branch" == "develop" || "$branch" == "staging" ]]; then
-            echo "Desplegando en ambiente de pruebas en la rama $branch"
-          elif [[ "$branch" == "main" ]]; then
-            echo "Desplegando en ambiente de producción en la rama $branch"
-          else
-            echo "Commit hecho en rama $branch, no hay despliegue automático"
-          fi
+#           if [[ "$branch" == "develop" || "$branch" == "staging" ]]; then
+#             echo "Desplegando en ambiente de pruebas en la rama $branch"
+#           elif [[ "$branch" == "main" ]]; then
+#             echo "Desplegando en ambiente de producción en la rama $branch"
+#           else
+#             echo "Commit hecho en rama $branch, no hay despliegue automático"
+#           fi

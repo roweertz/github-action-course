@@ -1,0 +1,24 @@
+name: validar-commit-mensaje
+on: push
+jobs:
+  validar-autor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar Autor
+        run: |
+          autor=${{ github.actor }} 
+          if [[ $autor == "octocat" ]]; then
+            echo "Gracias ${{ github.actor }} por tu contribución 🐱‍💻"
+          else
+            echo "Autor del commit: $autor"
+          fi
+  
+      - name: Validar Commit
+        run: |
+          nombre_comit = ${{ github.event.head_commit.message }}
+          palabra = "fix"
+          if [[ "$mensaje" == *"fix"* ]]; then
+            echo "Se detectó una corrección (fix) en el commit"
+          else
+            echo "Commit recibido de ${{ github.actor }} con mensaje: $nombre_comit"
+          fi

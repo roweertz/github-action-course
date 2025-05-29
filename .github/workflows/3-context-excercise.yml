@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mostrar rama actual
-        run: echo "Deploying to production server on branch $GITHUB_REF"
+        run: echo "On branch - $GITHUB_REF"
 
       - name: Lógica de despliegue según rama
         shell: bash
